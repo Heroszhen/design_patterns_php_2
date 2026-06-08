@@ -20,6 +20,7 @@ abstract class File
 
     abstract public function readFile();
     abstract public function writeFile();
+    abstract public function getContent();
 }
 
 class CSV extends File
@@ -27,13 +28,16 @@ class CSV extends File
     public function readFile()
     {
         var_dump("read csv : {$this->filePath}");
-
-        return 'content';
     }
 
     public function writeFile()
     {
         var_dump("write csv : {$this->filePath}");
+    } 
+
+    public function getContent()
+    {
+        return "csv content";
     } 
 }
 
@@ -47,6 +51,11 @@ class PDF extends File
     public function writeFile()
     {
         var_dump("write pdf : {$this->filePath}");
+    } 
+
+    public function getContent()
+    {
+        return "pdf content";
     } 
 }
 
@@ -66,7 +75,7 @@ class FileAdapter implements IModifiable
 
     public function modify()
     {
-        var_dump("{$this->file->getFilePath()}: modify {$this->file->readFile()}"); 
+        var_dump("{$this->file->getFilePath()}: modify {$this->file->getContent()}"); 
     }
 }
 
