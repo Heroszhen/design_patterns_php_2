@@ -1,7 +1,7 @@
 <?php
 //Il permet de convertir l'interface d'une classe en une autre interface
 //on a des classes: csv, pdf, excel qui servent à traiter ces types de fichiers
-//on crée une nouvelle interface qui sert à traiter et envoyer n'import quel fichier
+//on crée une nouvelle interface qui sert à envoyer n'import quel fichier
 //donc on crée un adaptateur qui prend un objet de type File en paramètre
 
 abstract class File
@@ -50,8 +50,6 @@ class PDF extends File
 
 interface ISender
 {
-    public function readFile();
-    public function writeFile();
     public function send();
 }
 
@@ -64,30 +62,16 @@ class GmailAdapter implements ISender
         $this->file = $file;
     }
 
-    public function readFile()
-    {
-        $this->file->readFile();
-    }
-
-    public function writeFile()
-    {
-        $this->file->writeFile();
-    }
-
     public function send()
     {
-        var_dump("gmail send csv : {$this->file->getFilePath()}"); 
+        var_dump("gmail send file : {$this->file->getFilePath()}"); 
     }
 }
 
 $csv = new CSV('abc.csv');
 $gmailAdpater = new GmailAdapter($csv);
-$gmailAdpater->readFile();
-$gmailAdpater->writeFile();
 $gmailAdpater->send();
 
-$csv = new PDF('def.pdf');
-$gmailAdpater = new GmailAdapter($csv);
-$gmailAdpater->readFile();
-$gmailAdpater->writeFile();
+$pdf = new PDF('def.pdf');
+$gmailAdpater = new GmailAdapter($pdf);
 $gmailAdpater->send();
