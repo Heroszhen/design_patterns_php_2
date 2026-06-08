@@ -1,7 +1,7 @@
 <?php
 //ajouter dynamiquement des fonctionnalités et des comportements à une classe sans la modifier
 //on a une classe Notifier qui implémente une interface INotifier , elle sert à envoyer des messages par gmail
-//on veux aussi envoyer des messages par hotmail et sms
+//on veux aussi envoyer des messages par téléfax et sms après l'envoi par mail
 
 interface INotifier {
     public function sendMessage(string $message);
@@ -25,16 +25,12 @@ abstract class Decorator implements INotifier
     }
 }
 
-class HotmailDecorator extends Decorator
+class FaxDecorator extends Decorator
 {
     public function sendMessage(string $message)
     {
         $this->notifier->sendMessage($message);
-    }
-
-    public function sendMessageByHotmail(string $message)
-    {
-        var_dump("hotmail : {$message}");
+        var_dump("fax : {$message}");
     }
 }
 
@@ -43,10 +39,6 @@ class SMSDecorator extends Decorator
     public function sendMessage(string $message)
     {
         $this->notifier->sendMessage($message);
-    }
-
-    public function sendMessageBySMS(string $message)
-    {
         var_dump("sms : {$message}");
     }
 }
@@ -55,7 +47,6 @@ $notifier = new Notifier();
 
 $smsNotifier = new SMSDecorator($notifier);
 $smsNotifier->sendMessage('abc');
-$smsNotifier->sendMessageBySMS('cba');
 
-$hotmailNotifier = new HotmailDecorator($notifier);
-$hotmailNotifier->sendMessageByHotmail('bac');
+$faxNotifier = new FaxDecorator($notifier);
+$faxNotifier->sendMessage('ccc');

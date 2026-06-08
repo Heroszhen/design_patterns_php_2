@@ -5,16 +5,16 @@
 use PDO;
 
 class ConnectMysql{
-    private static $pdo = null;
+    private static ?PDO $pdo = null;
 
     private function __construct() {}
 
     public static function getPDO() {
         if (self::$pdo === null) {
-            $pdo = new PDO("sqlite: db.sqlite");
+            self::$pdo = new PDO("sqlite: db.sqlite");
         }
 
-        return $pdo;
+        return self::$pdo;
     }
 }
 
