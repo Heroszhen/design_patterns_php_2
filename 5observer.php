@@ -88,6 +88,8 @@ class Mailer implements \SplObserver
 $mailerObserver = new Mailer();
 $user = new User();
 $user->attach($mailerObserver);
+var_dump($user);
 $user->setName("Vincent");
 $user->setPassword('123');
 $user->detach($mailerObserver);
+var_dump($user);
