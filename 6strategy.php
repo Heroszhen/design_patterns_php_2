@@ -1,4 +1,5 @@
 <?php
+//Il est ultra-utile quand vous avez plusieurs façons d'exécuter une action (plusieurs algorithmes)
 //on a plusieurs méthodes ou algorithmes pour traiter un calcul ou une sitation
 //on veux envoyer un mail un à client
 //on a plusieurs fournisseurs : hostinger gmail, sandinblue, accoustic
